@@ -1,6 +1,6 @@
 {% extends '/admin/layout.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Hello Admin !{% endblock %}
 
 {% block body %}
 
@@ -11,9 +11,7 @@
 
 <div>
      <h1>Bienvenue dans l'espace d'administration !</h1>
+     <a class="create-homepage" href="{{ path('homepage_new') }}">Create a new homepage</a>
 </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-</div>
 {% endblock %}

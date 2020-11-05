@@ -6,17 +6,17 @@
     <h1>Homepage index</h1>
 
     <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Body</th>
-                <th>TitleAbout</th>
-                <th>TextAbout</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Body</th>
+        <th>TitleAbout</th>
+        <th>TextAbout</th>
+        <th>actions</th>
+    </tr>
+    {% if homepages %}
+
         {% for homepage in homepages %}
             <tr>
                 <td>{{ homepage.id }}</td>
@@ -25,17 +25,21 @@
                 <td>{{ homepage.titleAbout }}</td>
                 <td>{{ homepage.textAbout }}</td>
                 <td>
-                    <a href="{{ path('homepage_show', {'id': homepage.id}) }}">show</a>
                     <a href="{{ path('homepage_edit', {'id': homepage.id}) }}">edit</a>
                 </td>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
         {% endfor %}
-        </tbody>
+    {% else %}
+        <tr>
+            <td>No homepage was found !</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <a href="{{ path('homepage_new') }}">Create new</a>
+            </td>
+        </tr> 
+    {% endif %}
     </table>
-
-    <a href="{{ path('homepage_new') }}">Create new</a>
 {% endblock %}

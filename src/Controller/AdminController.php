@@ -23,7 +23,9 @@ class AdminController extends AbstractController
         ]);
     }
     
-
+    /**
+     * @Route("/contact", name="contact_index", methods={"GET"})
+     */
     public function indexContact(ContactRepository $contactRepository): Response
     {
         return $this->render('contact/index.html.twig', [
@@ -31,11 +33,4 @@ class AdminController extends AbstractController
         ]);
     }
 
-
-    public function indexHomepage(HomepageRepository $homepageRepository): Response
-    {
-        return $this->render('homepage/index.html.twig', [
-            'homepage' => $homepageRepository->findAll(),
-        ]);
-    }
 }

@@ -2365,3 +2365,12 @@ ul.bottom_menu li {
     background: #050000;
 }
 
+
+
+
+/* FOOTER */
+
+footer-box{
+	position: fixed;
+	bottom: 0;
+}

@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class ContactController extends AbstractController
 {
 
-
     /**
      * @Route("/", name="contact_new", methods={"GET","POST"})
      */
