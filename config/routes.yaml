@@ -1,0 +1,7 @@
+index:
+    path: /
+    controller: App\Controller\HomepageController::show
+
+adminContact:
+    path: /admin/contact
+    controller: App\Controller\AdminController::indexContact
