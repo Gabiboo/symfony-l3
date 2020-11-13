@@ -32,5 +32,5 @@ class AdminController extends AbstractController
             'contacts' => $contactRepository->findAll(),
         ]);
     }
-
+  
 }

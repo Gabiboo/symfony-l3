@@ -630,7 +630,9 @@ a.navbar-brand {
 }
 
 /*------------------------------------------------------------------ Banner -------------------------------------------------------------------*/
-
+.top-image{
+	background-image: url(../images/Capture.PNG);
+}
 .home-slider {
 	position: relative;
 	height: 540px;

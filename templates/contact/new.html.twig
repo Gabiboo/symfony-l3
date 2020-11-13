@@ -1,11 +1,10 @@
 {% extends '/public/layout.html.twig' %}
 
-{% block title %}New Contact{% endblock %}
+{% block title %}Demande de contact{% endblock %}
 
 {% block body %}
-    <h1>Create new Contact</h1>
+    <h1>Demande de contact :</h1>
 
     {{ include('contact/_form.html.twig') }}
     
-    <a href="{{ path('contact_new') }}">back to list</a>
 {% endblock %}

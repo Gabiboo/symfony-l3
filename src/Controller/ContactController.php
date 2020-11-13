@@ -27,11 +27,15 @@ class ContactController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            // Initialiser la date au jour même
+            $contact->setCreated(new \DateTime());
+
             $entityManager->persist($contact);
             $entityManager->flush();
             $this->addFlash('success', 'Votre demande de contact à bien été pris en compte.');
 
-            return $this->redirectToRoute('test_entity_index');
+            return $this->redirectToRoute('index');
         }
 
         return $this->render('contact/new.html.twig', [

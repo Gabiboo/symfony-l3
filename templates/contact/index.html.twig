@@ -1,33 +1,28 @@
 {% extends '/admin/layout.html.twig' %}
 
-{% block title %}Contact index{% endblock %}
+{% block title %}Contact{% endblock %}
 
 {% block body %}
-    <h1>Contact index</h1>
+    <h1>Contact</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom</th>
                 <th>Email</th>
                 <th>Objet</th>
                 <th>Message</th>
-                <th>actions</th>
+                <th>Date de création</th>
             </tr>
         </thead>
         <tbody>
         {% for contact in contacts %}
             <tr>
-                <td>{{ contact.id }}</td>
                 <td>{{ contact.Nom }}</td>
                 <td>{{ contact.Email }}</td>
                 <td>{{ contact.Objet }}</td>
                 <td>{{ contact.Message }}</td>
-                <td>
-                    <a href="{{ path('contact_show', {'id': contact.id}) }}">show</a>
-                    <a href="{{ path('contact_edit', {'id': contact.id}) }}">edit</a>
-                </td>
+                <td>{{ contact.created|date('d/m/Y') }}</td>
             </tr>
         {% else %}
             <tr>
@@ -37,5 +32,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('contact_new') }}">Create new</a>
 {% endblock %}

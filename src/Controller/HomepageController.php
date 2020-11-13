@@ -46,10 +46,6 @@ class HomepageController extends AbstractController
         ]);
     }
 
-    /**
-     * name="index", methods={"GET"})
-     * 
-     */
     public function show(HomepageRepository $homepageRepository): Response
     {
         return $this->render('homepage/show.html.twig', [
