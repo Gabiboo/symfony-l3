@@ -3,10 +3,14 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Doctrine\Common\Annotations\Annotation\Required;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -18,10 +22,74 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('nom', null, [
+                'label' => "Nom *",
+                'required' => true,
+                'attr' => [
+                    'placeholder' => 'Jean'
+                ]
+            ])
+            ->add('prenom', null, [
+                'label' => "Prénom *",
+                'attr' => [
+                    'placeholder' => 'Dupont'
+                ]
+            ])
+            ->add('civilite', ChoiceType::class, [
+                'label' => "Civilité *",
+                'required' => true,
+                'choices'=>[
+                    'Homme' => 'Homme',
+                    'Femme' => 'Femme'
+                ]
+            ])
             ->add('email', EmailType::class, [
-                'label' => "Email",
+                'label' => "Email *",
+                'required' => true,
                 'attr' => [
                     'placeholder' => 'exemple@exemple.com'
+                ]
+            ])
+            ->add('telephone', null, [
+                'label' => "Numéro de téléphone",
+                'attr' => [
+                    'placeholder' => '06XXXXXXXX'
+                ]
+            ])
+
+            ->add('ville', null, [
+                'label' => "Ville",
+                'attr' => [
+                    'placeholder' => 'Paris'
+                ]
+            ])
+
+            ->add('code_postal', null, [
+                'label' => "Code Postal",
+                'attr' => [
+                    'placeholder' => '75000'
+                ]
+            ])
+
+            ->add('pays', null, [
+                'label' => "Pays",
+                'attr' => [
+                    'placeholder' => 'France'
+                ]
+            ])
+
+            ->add('numero_de_secu', null, [
+                'label' => "Numéro de sécurité social ",
+                'attr' => [
+                    'placeholder' => 'A BB CC DD EEE FFF GG'
+                ]
+            ])
+
+            ->add('date_de_naissance', BirthdayType::class, [
+                'label' => "Date de naissance *",
+                'required' => true,
+                'attr' => [
+                    'placeholder' => 'Select a value'
                 ]
             ])
             ->add('agreeTerms', CheckboxType::class, [
@@ -33,6 +101,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
+                'label' => "Password *",
                 'attr' => [
                     'placeholder' => '***********'
                 ],
