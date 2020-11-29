@@ -11,10 +11,32 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/user")
+ * @Route("/mon-espace-client")
  */
 class UserController extends AbstractController
 {
+
+    /**
+     * @Route("", name="user_home", methods={"GET", "POST"})
+     */
+    public function index(UserRepository $userRepository, Request $request): Response
+    {
+        //récupère l'utilisateur connecté
+        $user = $this->getUser();
+
+        //crée un formulaire lié a cet User
+        $form = $this->createForm(UserType::class, $user);
+        $form -> handleRequest($request);
+
+        if($form-> isSubmitted() && $form->isValid()){
+            $this-> getDoctrine()->getManager()->flush();
+        }
+
+        return $this->render('espace-client/layout.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
     /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
      */
