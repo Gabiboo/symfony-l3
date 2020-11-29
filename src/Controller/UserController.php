@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Souscription;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -33,6 +34,7 @@ class UserController extends AbstractController
         }
 
         return $this->render('espace-client/layout.html.twig', [
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }
@@ -82,5 +84,18 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('user_index');
+    }
+
+    /**
+     * @Route("/mes-souscriptions", name="user_souscritions", methods={"GET"})
+     */
+    public function souscription(Souscription $souscription, User $user): Response
+    {
+        $user = $this->getUser();
+        $user->getSouscriptions();
+
+        return $this->render('espace-client/souscriptions.html.twig', [
+            'souscription' => $souscription,
+        ]);
     }
 }

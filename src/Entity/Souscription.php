@@ -34,8 +34,11 @@ class Souscription
      */
     private $user;
 
-    public function __construct()
+    public function __construct(Offer $offers, User $user)
     {
+        $this->user = $user;
+        $this->offers = $offers;
+        
         $this->offers = new ArrayCollection();
     }
 

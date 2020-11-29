@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ContactRepository;
 use App\Repository\UserRepository;
+use App\Repository\OfferRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -63,6 +64,16 @@ class AdminController extends AbstractController
     {
         return $this->render('user/index.html.twig', [
             'users' => $userRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/offre", name="offer_index", methods={"GET"})
+     */
+    public function indexOffer(OfferRepository $offerRepository): Response
+    {
+        return $this->render('offer/index.html.twig', [
+            'offers' => $offerRepository->findAll(),
         ]);
     }
 }
