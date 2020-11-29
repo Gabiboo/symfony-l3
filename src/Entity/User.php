@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -85,6 +87,16 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $numero_de_secu;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Souscription::class, mappedBy="user")
+     */
+    private $souscriptions;
+
+    public function __construct()
+    {
+        $this->souscriptions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -280,6 +292,37 @@ class User implements UserInterface
     public function setNumeroDeSecu(?string $numero_de_secu): self
     {
         $this->numero_de_secu = $numero_de_secu;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Souscription[]
+     */
+    public function getSouscriptions(): Collection
+    {
+        return $this->souscriptions;
+    }
+
+    public function addSouscription(Souscription $souscription): self
+    {
+        if (!$this->souscriptions->contains($souscription)) {
+            $this->souscriptions[] = $souscription;
+            $souscription->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSouscription(Souscription $souscription): self
+    {
+        if ($this->souscriptions->contains($souscription)) {
+            $this->souscriptions->removeElement($souscription);
+            // set the owning side to null (unless already changed)
+            if ($souscription->getUser() === $this) {
+                $souscription->setUser(null);
+            }
+        }
 
         return $this;
     }
