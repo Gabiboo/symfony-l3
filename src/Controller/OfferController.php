@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Offer;
+use App\Entity\User;
 use App\Entity\Souscription;
 use App\Form\OfferType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 //use App\Controller\Souscription;
 use App\Repository\OfferRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -93,31 +95,9 @@ class OfferController extends AbstractController
 
         return $this->redirectToRoute('offer_index');
     }
-    
-    /**
-     * @Route("/{id}", name="subscribe_to_offer", methods={"POST"})
-     */
-    /*
-    public function subscribeToOffer(Offer $offer): Response
-    {
-        if($this->getUser() == null){
-            $this->addFlash = ('Veuillez vous connecter !');
-        }
-        else{
-            if(){   //Est-ce que l'utilisateur a rempli les informations obligatoires pour souscrire à une offre ?
-                if(){ //Est-ce que l'utilisateur a deja souscrit à cette offre ?
-                
-                
-                }else {
-                    
-                }
-            }else {
-            
-            }
-        }*/
          
-        /**
-     * @Route("/offre/souscrire/{id}", name="offer_subscribe", methods={"GET","POST"})
+    /**
+     * @Route("/souscrire/{id}", name="offer_subscribe", methods={"GET","POST"})
      */
     public function subscribeToOffer(Request $request, Offer $offer): Response
     {
@@ -134,7 +114,7 @@ class OfferController extends AbstractController
             if ($hasAllDataFilledOut) {
                 $subscribedToOfferAlready = false;
                 foreach ($user->getSouscriptions() as $subscription) {
-                    if ($subscription->getOffer() == $offer) {
+                    if ($subscription->getOffers() == $offer) {
                         $subscribedToOfferAlready = true;
                         break;
                     }

@@ -25,9 +25,9 @@ class Souscription
     private $etat;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Offer::class, inversedBy="offers")
+     * @ORM\ManyToOne(targetEntity=Offer::class, inversedBy="offer")
      */
-    private $offers;
+    private $offer;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="souscriptions")
@@ -39,7 +39,7 @@ class Souscription
     {
         $this->user = $user;
         $this->offers = $offers;
-        //$this->etat = $this->setEtat("En attente");
+        $this->etat = "En attente";
         
         $this->offers = new ArrayCollection();
     }
@@ -54,7 +54,7 @@ class Souscription
         return $this->etat;
     }
 
-    public function setEtat(string $etat): self
+    public function setEtat(?string $etat): self
     {
         $this->etat = $etat;
 
@@ -64,9 +64,9 @@ class Souscription
     /**
      * @return Collection|Offer[]
      */
-    public function getOffers(): Collection
+    public function getOffers(): ?Offer
     {
-        return $this->offers;
+        return $this->offer;
     }
 
     public function setOffers(?Offer $offer): self
@@ -76,27 +76,16 @@ class Souscription
         return $this;
     }
 
-    public function addOffer(Offer $offer): self
+    public function setSouscription(?User $souscription): self
     {
-        if (!$this->offers->contains($offer)) {
-            $this->offers[] = $offer;
-            $offer->setSouscription($this);
-        }
+        $this->souscription = $souscription;
 
         return $this;
     }
 
-    public function removeOffer(Offer $offer): self
+    public function getSouscription(): ?User
     {
-        if ($this->offers->contains($offer)) {
-            $this->offers->removeElement($offer);
-            // set the owning side to null (unless already changed)
-            if ($offer->getSouscription() === $this) {
-                $offer->setSouscription(null);
-            }
-        }
-
-        return $this;
+        return $this->souscription;
     }
 
     public function getUser(): ?User

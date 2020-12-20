@@ -8,7 +8,6 @@
         <div class="container">
         {% for message in app.flashes('success') %}
             <div class="alert alert-success">
-                
                 {{ message }}
             </div>
         {% endfor %}
@@ -21,13 +20,34 @@
         </div>
     </div>
     <div class="container">
-        <h1> Hello </h1>
+        <h1> Mes souscriptions </h1>
     </div>
     
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ offer.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ offer.titre }}</td>
+            </tr>
+            <tr>
+                <th>Intro</th>
+                <td>{{ offer.intro }}</td>
+            </tr>
+            <tr>
+                <th>Offre</th>
+                <td>{{ offer.offre }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ offer.prix }}</td>
+            </tr>
+        </tbody>
+    </table>
     
     <!-- Reste des éléments graphiques -->
-
-
-
 
 {% endblock %}

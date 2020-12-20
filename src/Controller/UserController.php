@@ -40,7 +40,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_show", methods={"GET"})
+     * @Route("/user/{id}", name="user_show", methods={"GET"})
      */
     public function show(User $user): Response
     {
@@ -64,15 +64,16 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/mes-souscriptions", name="user_souscritions", methods={"GET"})
+     * @Route("/mes-souscriptions", name="user_souscriptions", methods={"GET"})
      */
-    public function souscription(Souscription $souscription, User $user): Response
+    public function souscription(): Response
     {
+        
         $user = $this->getUser();
-        $user->getSouscriptions();
+        $souscriptions = $user->getSouscriptions();
 
         return $this->render('espace-client/souscriptions.html.twig', [
-            'souscription' => $souscription,
+            'souscription' => $souscriptions,
         ]);
     }
 }
