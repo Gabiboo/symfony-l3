@@ -2,7 +2,8 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
+use App\Entity\Souscription;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,7 +11,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass=UserRepository::class)
+ *
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface
@@ -24,6 +26,9 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
      */
     private $email;
 
@@ -64,6 +69,7 @@ class User implements UserInterface
     private $date_de_naissance;
 
     /**
+     * @Assert\Regex("^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}^")
      * @ORM\Column(type="integer", nullable=true)
      */
     private $telephone;
@@ -75,6 +81,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Regex("^(([0-8][0-9])|(9[0-5]))[0-9]{3}^")
      */
     private $code_postal;
 
@@ -85,6 +92,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Regex("^[12][0-9]{2}[0-1][0-9](2[AB]|[0-9]{2})[0-9]{3}[0-9]{3}[0-9]{2}^")
      */
     private $numero_de_secu;
 
@@ -93,13 +101,10 @@ class User implements UserInterface
      */
     private $souscriptions;
 
-    public function __construct(User $user, Offer $offer)
+    public function __construct()
     {
-        $this->user = $user;
-        $this->offers = $offer;
-        $this->etat = "En attente";
-
         $this->souscriptions = new ArrayCollection();
+        $this->roles[] = "ROLE_USER";
     }
 
     public function getId(): ?int

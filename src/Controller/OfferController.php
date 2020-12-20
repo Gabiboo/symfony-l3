@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Offer;
+use App\Entity\Souscription;
 use App\Form\OfferType;
+//use App\Controller\Souscription;
 use App\Repository\OfferRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +17,15 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class OfferController extends AbstractController
 {
+    /**
+     * @Route("/", name="offer_index", methods={"GET"})
+     */
+    public function indexOffer(OfferRepository $offerRepository): Response
+    {
+        return $this->render('offer/index.html.twig', [
+            'offers' => $offerRepository->findAll(),
+        ]);
+    }
     
     /**
      * @Route("/new", name="offer_new", methods={"GET","POST"})
@@ -86,8 +97,9 @@ class OfferController extends AbstractController
     /**
      * @Route("/{id}", name="subscribe_to_offer", methods={"POST"})
      */
+    /*
     public function subscribeToOffer(Offer $offer): Response
-    {/* 
+    {
         if($this->getUser() == null){
             $this->addFlash = ('Veuillez vous connecter !');
         }
@@ -104,9 +116,58 @@ class OfferController extends AbstractController
             }
         }*/
          
+        /**
+     * @Route("/offre/souscrire/{id}", name="offer_subscribe", methods={"GET","POST"})
+     */
+    public function subscribeToOffer(Request $request, Offer $offer): Response
+    {
+        $user = $this->getUser();
+        
+        if ($user) {
+            $hasAllDataFilledOut = (
+                $user->getTelephone() != NULL AND
+                $user->getVille() != NULL AND
+                $user->getCodePostal() != NULL AND
+                $user->getPays() != NULL AND
+                $user->getNumeroDeSecu() != NULL
+            );
+            if ($hasAllDataFilledOut) {
+                $subscribedToOfferAlready = false;
+                foreach ($user->getSouscriptions() as $subscription) {
+                    if ($subscription->getOffer() == $offer) {
+                        $subscribedToOfferAlready = true;
+                        break;
+                    }
+                }
+                if (!$subscribedToOfferAlready) {
+                    $entityManager = $this->getDoctrine()->getManager();
 
-        return $this->render('offer/show.html.twig', [
-            'offer' => $offer,
-        ]);
+                    $subscription = new Souscription($offer, $user);
+
+                    $user->addSouscription($subscription);
+                    $offer->addSouscription($subscription);
+
+                    $entityManager->persist($subscription);
+                    $entityManager->persist($user);
+                    $entityManager->persist($offer);
+                    $entityManager->flush();
+
+                    $this->addFlash('success', 'Merci de vous être abonné à cette offre !');
+                    return $this->redirectToRoute('user_souscriptions');
+                } else {
+                    $this->addFlash('error', 'Vous ne pouvez pas souscrire deux fois à la même offre');
+                    return $this->redirectToRoute('user_souscriptions');
+                }
+                
+            } else {
+                $this->addFlash('error', 'Vous devez remplir tout le formulaire pour souscrire à une offre');
+                return $this->redirectToRoute('espace_client');
+            }
+            
+        } else {
+            $this->addFlash('error', 'Vous devez être connecté pour souscrire à une nouvelle offre');
+            return $this->redirectToRoute('app_login');
+        }
+        
     }
 }

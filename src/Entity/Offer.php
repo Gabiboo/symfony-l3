@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OfferRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -38,10 +40,18 @@ class Offer
     private $prix;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Souscription::class, inversedBy="offers")
+     * @ORM\OneToMany(targetEntity=Souscription::class, mappedBy="souscription")
      * @ORM\JoinColumn(nullable=false)
      */
+    
     private $souscription;
+
+    public function __construct()
+    {
+        $this->relationSouscripOffer = new ArrayCollection();
+    }
+    
+
 
     public function getId(): ?int
     {
@@ -96,7 +106,10 @@ class Offer
         return $this;
     }
 
-    public function getSouscription(): ?Souscription
+    /**
+     * @return Collection|Souscription[]
+     */
+    public function getSouscription(): ?Collection
     {
         return $this->souscription;
     }
@@ -107,4 +120,24 @@ class Offer
 
         return $this;
     }
+    
+    public function addSoucription(Souscription $souscription): self
+    {
+        if (!$this->souscriptions->contains($souscription)) {
+            $this->souscriptions[] = $souscription;
+            $souscription->setOffers($this);
+        }
+        return $this;
+    }
+    
+    public function addSouscription(Souscription $relationSouscripOffer): self
+    {
+        if (!$this->relationSouscripOffer->contains($relationSouscripOffer)) {
+            $this->relationSouscripOffer[] = $relationSouscripOffer;
+            $relationSouscripOffer->setOffers($this);
+        }
+
+        return $this;
+    }
+
 }

@@ -25,7 +25,7 @@ class Souscription
     private $etat;
 
     /**
-     * @ORM\OneToMany(targetEntity=Offer::class, mappedBy="souscription", orphanRemoval=true)
+     * @ORM\ManyToOne(targetEntity=Offer::class, inversedBy="offers")
      */
     private $offers;
 
@@ -34,10 +34,12 @@ class Souscription
      */
     private $user;
 
+
     public function __construct(Offer $offers, User $user)
     {
         $this->user = $user;
         $this->offers = $offers;
+        //$this->etat = $this->setEtat("En attente");
         
         $this->offers = new ArrayCollection();
     }
@@ -65,6 +67,13 @@ class Souscription
     public function getOffers(): Collection
     {
         return $this->offers;
+    }
+
+    public function setOffers(?Offer $offer): self
+    {
+        $this->offer = $offer;
+
+        return $this;
     }
 
     public function addOffer(Offer $offer): self

@@ -2211,13 +2211,13 @@ ul.social_icon li {
 
 .blog_details {
 	position: absolute;
-	height: 100%;
-    left: 0;
-    bottom: 0;
-    background: #ff880e;
-    padding: 15px 0 5px;
-    text-align: center;
-    transition: ease all 0.25s;
+	left: 0;
+	bottom: 0;
+	background: #dddddd;
+	padding: 15px 0 5px;
+	text-align: center;
+	transition: ease all 0.25s;
+	
 }
 
 .news_blog:hover .blog_details,
@@ -2374,6 +2374,9 @@ ul.bottom_menu li {
 /* FOOTER */
 
 footer-box{
+	
+
+	height:50px;
 	position: fixed;
 	bottom: 0;
 }

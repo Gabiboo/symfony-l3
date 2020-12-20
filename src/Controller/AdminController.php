@@ -101,11 +101,11 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/offre", name="offer_index", methods={"GET"})
+     * @Route("/offre", name="offer_index_a", methods={"GET"})
      */
     public function indexOffer(OfferRepository $offerRepository): Response
     {
-        return $this->render('offer/index.html.twig', [
+        return $this->render('offer/indexA.html.twig', [
             'offers' => $offerRepository->findAll(),
         ]);
     }
