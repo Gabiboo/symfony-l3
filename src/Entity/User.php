@@ -93,8 +93,12 @@ class User implements UserInterface
      */
     private $souscriptions;
 
-    public function __construct()
+    public function __construct(User $user, Offer $offer)
     {
+        $this->user = $user;
+        $this->offers = $offer;
+        $this->etat = "En attente";
+
         $this->souscriptions = new ArrayCollection();
     }
 

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends '/public/layout.html.twig' %}
 
 {% block title %}Offer{% endblock %}
 
@@ -27,12 +27,17 @@
                 <th>Prix</th>
                 <td>{{ offer.prix }}</td>
             </tr>
+            <tr>
+                <th>Action</th>
+                <td><a href="{{ path('subscribeToOffer', {'id': offer.id}) }}">Souscrire</a></td>
+            </tr>
         </tbody>
     </table>
 
     <a href="{{ path('offer_index') }}">back to list</a>
 
     <a href="{{ path('offer_edit', {'id': offer.id}) }}">edit</a>
+
 
     {{ include('offer/_delete_form.html.twig') }}
 {% endblock %}

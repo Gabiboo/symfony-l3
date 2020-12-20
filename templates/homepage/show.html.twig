@@ -3,41 +3,19 @@
 {% block title %}Homepage{% endblock %}
 
 {% block body %}
-    <h1>Homepage</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ homepage.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ homepage.title }}</td>
-            </tr>
-            <tr>
-                <th>Body</th>
-                <td>{{ homepage.body }}</td>
-            </tr>
-            <tr>
-                <th>TitleAbout</th>
-                <td>{{ homepage.titleAbout }}</td>
-            </tr>
-            <tr>
-                <th>TextAbout</th>
-                <td>{{ homepage.textAbout }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="full">
+                <div class="heading_main text_align_center">
+                    <h2><span class="theme_color"></span>Homepage</h2>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <a href="{{ path('homepage_index') }}">back to list</a>
-
-    <a href="{{ path('homepage_edit', {'id': homepage.id}) }}">edit</a>
-
-    {{ include('homepage/_delete_form.html.twig') }}
-
-                <!-- section -->
-    <div class="section">
+    <!-- section -->
+    <div class="section container">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">

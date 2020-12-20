@@ -6,6 +6,7 @@ use App\Entity\Offer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 
 class OfferType extends AbstractType
 {
@@ -15,8 +16,10 @@ class OfferType extends AbstractType
             ->add('titre')
             ->add('intro')
             ->add('offre')
-            ->add('prix')
-            ->add('souscription')
+            ->add('prix', MoneyType::class,[
+                'currency'=> 'EUR',
+            ])
+            //->add('souscription')
         ;
     }
 

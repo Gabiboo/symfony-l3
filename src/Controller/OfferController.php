@@ -82,4 +82,31 @@ class OfferController extends AbstractController
 
         return $this->redirectToRoute('offer_index');
     }
+    
+    /**
+     * @Route("/{id}", name="subscribe_to_offer", methods={"POST"})
+     */
+    public function subscribeToOffer(Offer $offer): Response
+    {/* 
+        if($this->getUser() == null){
+            $this->addFlash = ('Veuillez vous connecter !');
+        }
+        else{
+            if(){   //Est-ce que l'utilisateur a rempli les informations obligatoires pour souscrire à une offre ?
+                if(){ //Est-ce que l'utilisateur a deja souscrit à cette offre ?
+                
+                
+                }else {
+                    
+                }
+            }else {
+            
+            }
+        }*/
+         
+
+        return $this->render('offer/show.html.twig', [
+            'offer' => $offer,
+        ]);
+    }
 }

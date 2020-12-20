@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Article;
 use App\Form\UserType;
+use App\Form\ArticleType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ContactRepository;
 use App\Repository\UserRepository;
 use App\Repository\OfferRepository;
+use App\Repository\ArticleRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -37,6 +40,36 @@ class AdminController extends AbstractController
         ]);
     }
     
+    /**
+     * @Route("/article", name="article_index_a", methods={"GET"})
+     */
+    public function indexArticle(ArticleRepository $articleRepository): Response
+    {
+        return $this->render('article/indexA.html.twig', [
+            'articles' => $articleRepository->findAll(),
+        ]);
+    }
+
+        /**
+     * @Route("/{id}/edit", name="article_edit", methods={"GET","POST"})
+     */
+    public function editArticle(Request $request, Article $article): Response
+    {
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('article_index');
+        }
+
+        return $this->render('article/edit.html.twig', [
+            'article' => $article,
+            'form' => $form->createView(),
+        ]);
+    }
+
     /**
      * @Route("/user/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
@@ -76,4 +109,5 @@ class AdminController extends AbstractController
             'offers' => $offerRepository->findAll(),
         ]);
     }
+    
 }

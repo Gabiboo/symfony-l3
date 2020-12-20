@@ -59,25 +59,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="article_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Article $article): Response
-    {
-        $form = $this->createForm(ArticleType::class, $article);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('article_index');
-        }
-
-        return $this->render('article/edit.html.twig', [
-            'article' => $article,
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/{id}", name="article_delete", methods={"DELETE"})
