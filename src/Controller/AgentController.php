@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AgentController extends AbstractController
 {
     /**
-     * @Route("", name="agent")
+     * @Route("/", name="agent")
      */
     public function index()
     {

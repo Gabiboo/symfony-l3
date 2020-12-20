@@ -33,7 +33,7 @@ class ContactController extends AbstractController
 
             $entityManager->persist($contact);
             $entityManager->flush();
-            $this->addFlash('success', 'Votre demande de contact à bien été pris en compte.');
+            $this->addFlash('success', 'Votre demande de contact à bien été prise en compte.');
 
             return $this->redirectToRoute('index');
         }

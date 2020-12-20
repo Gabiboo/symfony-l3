@@ -6,8 +6,6 @@ use App\Entity\Offer;
 use App\Entity\User;
 use App\Entity\Souscription;
 use App\Form\OfferType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-//use App\Controller\Souscription;
 use App\Repository\OfferRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
