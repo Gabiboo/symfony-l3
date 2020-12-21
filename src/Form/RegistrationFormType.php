@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -71,11 +71,18 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
 
-            ->add('pays', null, [
-                'label' => "Pays",
+            
+            ->add('pays', CountryType::class, [
+                'required' => false,
+                'preferred_choices' => ['DE'],
+                'label' => 'Pays',
                 'attr' => [
-                    'placeholder' => 'France'
-                ]
+                    'class' => 'form-control',
+                    'placeholder' => 'address.form.country.placeholder'
+                ],
+                'label_attr' => [
+                    'class' => 'col-sm-2 col-form-label'
+                ],
             ])
 
             ->add('numero_de_secu', null, [

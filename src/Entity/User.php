@@ -69,8 +69,8 @@ class User implements UserInterface
     private $date_de_naissance;
 
     /**
-     * @Assert\Regex("^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}^")
-     * @ORM\Column(type="integer", nullable=true)
+     * 
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $telephone;
 

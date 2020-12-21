@@ -13,6 +13,14 @@
             </div>
         </div>
     </div>
+    <div class="container">
+        <h1> Bienvenue, {{ user.nom }}.</h1>
+        <h2>Quelque liens utiles :</h2>
+        <a href="{{ path('user_souscriptions') }}">Voir les offres les plus souscrites</a></br>
+        <a href="{{ path('user_show', {'id': user.id}) }}">Voir mes informations</a></br>
+        <a href="{{ path('user_edit', {'id': user.id}) }}">Modifier mes informations</a></br>
+
+    </div>
     <div class="section first">
         <div class="container">
         {% for message in app.flashes('success') %}
@@ -29,10 +37,7 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <h1> Bienvenue, {{ user.nom }}.</h1>
-
-    </div>
+    
     
     
     <!-- Reste des éléments graphiques -->

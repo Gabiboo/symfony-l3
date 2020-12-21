@@ -71,7 +71,17 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/user/{id}/edit", name="user_edit", methods={"GET","POST"})
+     * @Route("/user/{id}", name="user_show_a", methods={"GET"})
+     */
+    public function showUser(User $user): Response
+    {
+        return $this->render('user/show.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    /**
+     * @Route("/user/{id}/edit", name="user_edit_a", methods={"GET","POST"})
      */
     public function edit(Request $request, User $user): Response
     {

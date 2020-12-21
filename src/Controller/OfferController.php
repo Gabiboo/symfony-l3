@@ -133,17 +133,17 @@ class OfferController extends AbstractController
                     $this->addFlash('success', 'Merci de vous être abonné à cette offre !');
                     return $this->redirectToRoute('user_souscriptions');
                 } else {
-                    $this->addFlash('error', 'Vous ne pouvez pas souscrire deux fois à la même offre');
+                    $this->addFlash('success', 'Vous ne pouvez pas souscrire plusieurs fois à la même offre');
                     return $this->redirectToRoute('user_souscriptions');
                 }
                 
             } else {
-                $this->addFlash('error', 'Vous devez remplir tout le formulaire pour souscrire à une offre');
-                return $this->redirectToRoute('espace_client');
+                $this->addFlash('success', 'Vous devez remplir tout le formulaire pour souscrire à une offre');
+                return $this->redirectToRoute('user_edit');
             }
             
         } else {
-            $this->addFlash('error', 'Vous devez être connecté pour souscrire à une nouvelle offre');
+            $this->addFlash('success', 'Vous devez être connecté pour souscrire à une nouvelle offre');
             return $this->redirectToRoute('app_login');
         }
         

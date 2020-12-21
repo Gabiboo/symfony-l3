@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Souscription;
 use App\Entity\User;
+use App\Form\RegistrationFormType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -44,7 +45,7 @@ class UserController extends AbstractController
      */
     public function show(User $user): Response
     {
-        return $this->render('user/show.html.twig', [
+        return $this->render('espace-client/show.html.twig', [
             'user' => $user,
         ]);
     }
@@ -60,7 +61,7 @@ class UserController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('user_index');
+        return $this->redirectToRoute('user_home');
     }
 
     /**
@@ -74,6 +75,26 @@ class UserController extends AbstractController
 
         return $this->render('espace-client/souscriptions.html.twig', [
             'souscription' => $souscriptions,
+        ]);
+    }
+
+    /**
+     * @Route("/client/{id}/edit", name="user_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, User $user): Response
+    {
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('user_home');
+        }
+
+        return $this->render('espace-client/edit.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
         ]);
     }
 }

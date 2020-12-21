@@ -1,0 +1,54 @@
+{% extends '/espace-client/layout.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <h1>User</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ user.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ user.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Civilité</th>
+                <td>{{ user.civilite }}</td>
+            </tr>
+            <tr>
+                <th>Numéro de téléphone</th>
+                <td>{{ user.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ user.ville }}</td>
+            </tr>
+            <tr>
+                <th>Pays</th>
+                <td>{{ user.pays }}</td>
+            </tr>
+            <tr>
+                <th>Mon Numéro de Sécurité Social</th>
+                <td>{{ user.numeroDeSecu }}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_edit', {'id': user.id}) }}">Modifier mes informations</a>
+
+    <h2>Attention, supprimer son compte est une action irrevérsible.</h2>
+    {{ include('user/_delete_form.html.twig') }}
+{% endblock %}
