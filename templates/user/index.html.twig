@@ -3,15 +3,22 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="full">
+                <div class="heading_main text_align_center">
+                    <h2><span class="theme_color text-align-center"></span>Utilisateurs inscrits</h2>
+                </div>
+            </div>
+        </div>
+    </div>
     <table class="table">
-        <thead>
+        <thead class="thead-dark">
             <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>actions</th>
+                <th scope="col">Id</th>
+                <th scope="col">Email</th>
+                <th scope="col">Roles</th>
+                <th scope="col">actions</th>
             </tr>
         </thead>
         <tbody>
@@ -21,13 +28,13 @@
                 <td>{{ user.email }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                 <td>
-                    <a href="{{ path('user_show_a', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit_a', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('user_show_a', {'id': user.id}) }}">Voir le profil</a></br>
+                    <a href="{{ path('user_edit_a', {'id': user.id}) }}">Éditer le profil</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Aucun utilisateurs n'est inscrit !</td>
             </tr>
         {% endfor %}
         </tbody>

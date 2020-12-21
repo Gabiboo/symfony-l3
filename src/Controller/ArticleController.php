@@ -25,28 +25,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/new", name="article_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $article = new Article();
-        $form = $this->createForm(ArticleType::class, $article);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($article);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('article_index');
-        }
-
-        return $this->render('article/new.html.twig', [
-            'article' => $article,
-            'form' => $form->createView(),
-        ]);
-    }
+    
 
     /**
      * @Route("/{id}", name="article_show", methods={"GET"})
@@ -58,7 +37,6 @@ class ArticleController extends AbstractController
             'articles' => $articleRepository->findAll(),
         ]);
     }
-
 
 
     /**

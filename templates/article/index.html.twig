@@ -17,7 +17,7 @@
     {% for article in articles %}
         <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="full news_blog">
-                <img class="img-responsive" src="{{ asset('images/b1.png') }}" alt="#" />
+                <img class="img-responsive" src="{{ asset('images/articles/' ~ article.brochureFilename) }}" alt="#" />
                 <div class="overlay"><a class="main_bt transparent" href="{{ path('article_show', {'id': article.id}) }}">View</a></div>
                 <div class="blog_details">
                     <h3>{{ article.title }}</h3>

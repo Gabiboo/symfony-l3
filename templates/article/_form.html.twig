@@ -1,18 +1,31 @@
 {{ form_start(form) }}
 
     <div class="row">
-        <div class="col">
+        <div class="col-6">
             {{ form_row(form.title) }}
-
-            <strong>{{ form_label(form.created) }}</strong>
-            {{ form_widget(form.created) }}
         </div>
-        <div class="col">
+        <div class="col-6">
+            {{ form_row(form.subtitle) }}
+            
+        </div>
+        <div class="col-12">
             {{ form_row(form.content) }}
         </div>
-        
+        <div class="col-6">
+            
+            {{ form_row(form.brochure) }}
+        </div>
+        <div class="col-6 align-items-center">
+            {{ form_label(form.created) }}
+            {{ form_widget(form.created) }}
+        </div>
+        <div class="col-4 align-items-center">
+        {% if imgName is defined %}
+            <img class="img-responsive" src="{{ asset('images/articles/' ~ imgName) }}" alt="#" />
+        {% endif %}
+        </div>
     </div>
-<button class="btn">{{ button_label|default('Save') }}</button>
+<button class="btn btn-dark">{{ button_label|default('Save') }}</button>
 
     
 {{ form_end(form) }}

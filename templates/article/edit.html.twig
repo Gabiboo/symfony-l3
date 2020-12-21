@@ -3,11 +3,17 @@
 {% block title %}Edit Article{% endblock %}
 
 {% block body %}
-    <h1>Edit Article</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="full">
+                <div class="heading_main text_align_center">
+                    <h2><span class="theme_color"></span>Editer un article</h2>
+                </div>
+            </div>
+        </div>
+    </div>  
+    <a class="btn btn-light", href="{{ path('article_index') }}"> < liste des articles</a>
 
+    {{ include('article/_delete_form.html.twig') }}    
     {{ include('article/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('article_index') }}">back to list</a>
-
-    {{ include('article/_delete_form.html.twig') }}
 {% endblock %}

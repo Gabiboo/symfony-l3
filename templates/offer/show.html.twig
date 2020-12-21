@@ -3,36 +3,31 @@
 {% block title %}Offer{% endblock %}
 
 {% block body %}
-    <h1>Offer</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="full">
+                <div class="heading_main text_align_left">
+                    <h2><span class="theme_color"></span>{{ offer.titre }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="full">
+                <p class="light-gray gray"> {{ offer.intro }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="full text_align_center">
+                <p class=" text-black ">{{ offer.offre }}</p>
+                <p class=" text-black ">À partir de {{ offer.prix }}€</p>
+                <a class="btn btn-dark" href="{{ path('offer_subscribe', {'id': offer.id}) }}">Souscrire</a>
+            </div>
+        </div>
+    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ offer.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ offer.titre }}</td>
-            </tr>
-            <tr>
-                <th>Intro</th>
-                <td>{{ offer.intro }}</td>
-            </tr>
-            <tr>
-                <th>Offre</th>
-                <td>{{ offer.offre }}</td>
-            </tr>
-            <tr>
-                <th>Prix</th>
-                <td>{{ offer.prix }}</td>
-            </tr>
-            <tr>
-                <th>Action</th>
-                <td><a href="{{ path('offer_subscribe', {'id': offer.id}) }}">Souscrire</a></td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('offer_index') }}">back to list</a>
+    </br><a class="btn btn-light" href="{{ path('offer_index') }}"> < revenir à la liste</a>
 {% endblock %}

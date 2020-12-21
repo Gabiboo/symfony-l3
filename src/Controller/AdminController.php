@@ -7,13 +7,17 @@ use App\Entity\Article;
 use App\Form\UserType;
 use App\Form\ArticleType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ContactRepository;
 use App\Repository\UserRepository;
 use App\Repository\OfferRepository;
 use App\Repository\ArticleRepository;
+use App\Service\FileUploader;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
  * @Route("/admin")
@@ -50,23 +54,80 @@ class AdminController extends AbstractController
         ]);
     }
 
-        /**
-     * @Route("/{id}/edit", name="article_edit", methods={"GET","POST"})
+    /**
+     * @Route("/article/new", name="article_new_a", methods={"GET","POST"})
      */
-    public function editArticle(Request $request, Article $article): Response
+    public function newArticle(Request $request, FileUploader $fileUploader): Response
     {
+        $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            /** @var UploadedFile $brochureFile */
+            $brochureFile = $form->get('brochure')->getData();
+            
+            if ($brochureFile) {
+                
+                $brochureFileName = $fileUploader->upload($brochureFile);
+                
+                $article->setBrochureFilename($brochureFileName);
+            }
+
+            $entityManager->persist($article);
+            $entityManager->flush();
+
+
+            $this->addFlash(
+                'success',
+                'Un article à été ajouté avec succès !'
+            );
+            return $this->redirectToRoute('article_index_a');
+        }
+
+        return $this->render('article/new.html.twig', [
+            'article' => $article,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="article_edit", methods={"GET","POST"})
+     */
+    public function editArticle(Request $request, Article $article, FileUploader $fileUploader): Response
+    {
+        $imgName = $article->getBrochureFilename();
+        $article->setBrochureFilename(
+            new File($this->getParameter('article_image_directory').'/'.$article->getBrochureFilename())
+        );
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            /** @var UploadedFile $brochureFile */
+            $brochureFile = $form->get('brochure')->getData();
+            
+            if ($brochureFile) {
+                $brochureFileName = $fileUploader->upload($brochureFile);
+                
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $article->setBrochureFilename($brochureFileName);
+            }else{
+                $article->setBrochureFilename($imgName);
+            }
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('article_index');
+            return $this->redirectToRoute('article_index_a');
         }
 
         return $this->render('article/edit.html.twig', [
             'article' => $article,
             'form' => $form->createView(),
+            'imgName' => $imgName
         ]);
     }
 

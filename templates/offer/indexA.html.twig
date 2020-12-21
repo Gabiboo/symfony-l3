@@ -3,39 +3,32 @@
 {% block title %}Offer index{% endblock %}
 
 {% block body %}
-    <h1>Offer index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Intro</th>
-                <th>Offre</th>
-                <th>Prix</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for offer in offers %}
-            <tr>
-                <td>{{ offer.id }}</td>
-                <td>{{ offer.titre }}</td>
-                <td>{{ offer.intro }}</td>
-                <td>{{ offer.offre }}</td>
-                <td>{{ offer.prix }}</td>
-                <td>
-                    <a href="{{ path('offer_show', {'id': offer.id}) }}">show</a>
-                    <a href="{{ path('offer_edit', {'id': offer.id}) }}">edit</a>
-                </td>
-            </tr>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="full">
+                <div class="heading_main text_align_center">
+                    <h2><span class="theme_color text-align-center"></span>Offres publiées</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+    {% for offer in offers %}
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="full news_blog">
+                <img class="img-responsive" src="{{ asset('images/b1.png') }}" alt="#" />
+                <div class="overlay"><a class="main_bt transparent" href="{{ path('offer_edit', {'id': offer.id}) }}">Modifier</a></div>
+                <div class="blog_details">
+                    <h3>{{ offer.titre }}</h3>
+                    <p>{{offer.intro}}</p>
+                    <p>{{offer.prix}}€</p>
+                </div>
+            </div>
+        </div>
         {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('offer_new') }}">Create new</a>
+        <h3> Vous n'avez pas encore publié d'offre !</h3>
+   {% endfor %}
+    </div>
+    <a class="btn btn-dark " href="{{ path('offer_new') }}">Créer une nouvelle offre</a>
 {% endblock %}
