@@ -3,11 +3,14 @@
 {% block title %}Edit User{% endblock %}
 
 {% block body %}
-    <h1>Modification de votre compte, {{ user.prenom }} : </h1>
+    
+    <a class="btn btn-light" href="{{ path('user_home') }}">Mon espace</a>
 
     {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('user_home') }}">Revenir à la liste</a>
-
-    {{ include('user/_delete_form.html.twig') }}
+    <div class="text_align_right"> 
+        <h2>Attention, supprimer son compte est une action irrevérsible.</h2>
+        {{ include('user/_delete_form.html.twig') }}
+    </div>
+    
 {% endblock %}

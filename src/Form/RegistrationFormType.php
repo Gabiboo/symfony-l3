@@ -53,7 +53,7 @@ class RegistrationFormType extends AbstractType
             ->add('telephone', null, [
                 'label' => "Numéro de téléphone",
                 'attr' => [
-                    'placeholder' => '06XXXXXXXX'
+                    'placeholder' => '0607080910'
                 ]
             ])
 

@@ -3,8 +3,17 @@
 {% block title %}Souscription{% endblock %}
 
 {% block body %}
-    <h1>Souscription</h1>
-
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="full">
+                <div class="heading_main text_align_center">
+                    <h2><span class="theme_color"></span>Souscriptions numéro {{souscription.id}} :</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-light"href="{{ path('souscription_index') }}"> < liste des souscriptions</a>
     <table class="table">
         <tbody>
             <tr>
@@ -18,9 +27,19 @@
         </tbody>
     </table>
 
-    <a href="{{ path('souscription_index') }}">back to list</a>
 
-    <a href="{{ path('souscription_edit', {'id': souscription.id}) }}">edit</a>
 
-    {{ include('souscription/_delete_form.html.twig') }}
+    
+    <div class="row">
+        <div class="col-6 text_align_left">
+            <a class="btn btn-dark" href="{{ path('souscription_edit', {'id': souscription.id}) }}">Éditer cette souscription</a>
+        </div>
+        
+        <div class="col-6 text_align_right">
+            <p class=" alert-danger">Attention : Supprimer une souscription est une action irrevérsible.</p>
+            {{ include('souscription/_delete_form.html.twig') }}
+        </div>
+    </div>
+    
+    
 {% endblock %}

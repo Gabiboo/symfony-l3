@@ -6,6 +6,7 @@ use App\Entity\Offer;
 use App\Entity\User;
 use App\Entity\Souscription;
 use App\Form\OfferType;
+use App\Controller\UserController;
 use App\Repository\OfferRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -129,12 +130,13 @@ class OfferController extends AbstractController
                     $entityManager->persist($user);
                     $entityManager->persist($offer);
                     $entityManager->flush();
-
+                    
                     $this->addFlash('success', 'Merci de vous être abonné à cette offre !');
-                    return $this->redirectToRoute('user_souscriptions');
+                    return $this->redirectToRoute('index');
                 } else {
+                    //il n'y a que les flash success qui fonctionnent
                     $this->addFlash('success', 'Vous ne pouvez pas souscrire plusieurs fois à la même offre');
-                    return $this->redirectToRoute('user_souscriptions');
+                    return $this->redirectToRoute('offer_index');
                 }
                 
             } else {

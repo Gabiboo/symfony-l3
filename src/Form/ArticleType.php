@@ -20,9 +20,7 @@ class ArticleType extends AbstractType
         $builder
             ->add('title')
             ->add('subtitle')
-            ->add('content', CKEditorType::class, [
-                'config'      => array('uiColor' => '#ffffff'),
-                ])
+            ->add('content', CKEditorType::class)
             ->add('created')
             ->add('categories', CollectionType::class, [
                 'entry_type' => CategoryType::class,

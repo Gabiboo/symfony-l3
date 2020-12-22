@@ -3,14 +3,22 @@
 {% block title %}Souscription index{% endblock %}
 
 {% block body %}
-    <h1>Souscription index</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="full">
+                <div class="heading_main text_align_center">
+                    <h2><span class="theme_color"></span>Souscriptions par utilisateur :</h2>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <table class="table">
-        <thead>
+        <thead class="thead-dark">
             <tr>
-                <th>Id</th>
-                <th>Etat</th>
-                <th>actions</th>
+                <th scope="row">Id</th>
+                <th scope="row">Etat</th>
+                <th class=" text_align_right" scope="row">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -18,18 +26,16 @@
             <tr>
                 <td>{{ souscription.id }}</td>
                 <td>{{ souscription.etat }}</td>
-                <td>
-                    <a href="{{ path('souscription_show', {'id': souscription.id}) }}">show</a>
-                    <a href="{{ path('souscription_edit', {'id': souscription.id}) }}">edit</a>
+                <td class="text_align_right">
+                    <a class="btn btn-info" href="{{ path('souscription_show', {'id': souscription.id}) }}">show</a>
+                    <a class="btn btn-dark" href="{{ path('souscription_edit', {'id': souscription.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Personne n'a souscrit aux offres du site ou bien aucune offre n'est actuellement publié.</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('souscription_new') }}">Create new</a>
 {% endblock %}

@@ -1,17 +1,18 @@
-{% extends 'base.html.twig' %}
+{% extends '/espace-client/layout.html.twig' %}
 
-{% block title %}Espace Agent{% endblock %}
-
-{% block navbar_links %}
-    <li><a class="nav-link active" href="{{ path('index')}}">Home</a></li>
-    <li><a class="nav-link active" href="{{ path('souscription_index') }}">Gerer souscriptions</a></li>
-
-    
-{% endblock %}
+{% block title %}Welcome!{% endblock %}
 
 {% block layout %}
 
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="full">
+                <div class="heading_main text_align_center">
+                    <h2><span class="theme_color"></span>Mon Espace Client</h2>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="section first">
         <div class="container">
         {% for message in app.flashes('success') %}
@@ -28,7 +29,7 @@
             </div>
         </div>
     </div>
-
+    
     
     
     <!-- Reste des éléments graphiques -->

@@ -15,7 +15,7 @@
     </div>
     <div class="row">
     {% for offer in offers %}
-        <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="full news_blog">
                 <img class="img-responsive" src="{{ asset('images/b1.png') }}" alt="#" />
                 <div class="overlay"><a class="main_bt transparent" href="{{ path('offer_edit', {'id': offer.id}) }}">Modifier</a></div>
@@ -23,6 +23,7 @@
                     <h3>{{ offer.titre }}</h3>
                     <p>{{offer.intro}}</p>
                     <p>{{offer.prix}}€</p>
+                    <p class=" text-danger">{{offer.souscription|length}} utilisateurs ont souscrit à cette offre</p>
                 </div>
             </div>
         </div>

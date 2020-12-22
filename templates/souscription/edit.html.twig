@@ -3,11 +3,26 @@
 {% block title %}Edit Souscription{% endblock %}
 
 {% block body %}
-    <h1>Vous pouvez valider cette souscription en changeant son statut :</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="full">
+                <div class="heading_main text_align_center">
+                    <h2><span class="theme_color"></span>Editer Souscription :</h2>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {{ include('souscription/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('souscription_index') }}">back to list</a>
-
-    {{ include('souscription/_delete_form.html.twig') }}
+    
+    <div class="row">
+        <div class="col-6 text_align_left">
+            <a class="btn btn-light" href="{{ path('souscription_index') }}"> < liste des souscriptions</a>
+        </div>
+        
+        <div class="col-6 text_align_right">
+            <p class=" alert-danger">Attention : Supprimer une souscription est une action irrevérsible.</p>
+            {{ include('souscription/_delete_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

@@ -7,34 +7,38 @@
         <div class="col-md-12">
             <div class="full">
                 <div class="heading_main text_align_center">
-                    <h2><span class="theme_color"></span>Mes Souscriptions</h2>
+                    <h2><span class="theme_color text-align-center"></span>Mes souscriptions</h2>
                 </div>
             </div>
         </div>
     </div>
-    <div class="section first">
-        <div class="container">
-        {% for message in app.flashes('success') %}
-            <div class="alert alert-success">
-                {{ message }}
-            </div>
-        {% endfor %}
-            <div class="row">
-                <div class="col-md-12">
-                    {% block body %}
-                    {% endblock %}
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <div class="container">
-        <h1> Mes souscriptions </h1>
+        <div class="row">
+        {% for user in souscription %}
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <div class="full news_blog">
+                    
+                    <img class="img-responsive" src="{{ asset('images/b1.png') }}" alt="#" />
+                    <div class="overlay"><a class="main_bt transparent" href="{{ path('offer_index') }}">View</a></div>
+                    <div class="blog_details">
+                        <p>Informations sur cette souscription :</p>
+                        {{ user.id }}
+                        <div class=" text-danger">
+                            {{ user.etat }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="container">
+                <div class="col-12">
+                    <h3> Vous n'avez aucune souscription ! </h3>
+                </div>
+            </div>
+    {% endfor %}
+        </div>
     </div>
-    
-    <table class="table">
-    </table>
-
-    
     <!-- Reste des éléments graphiques -->
 
 {% endblock %}
