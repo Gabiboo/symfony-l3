@@ -50,6 +50,13 @@ class RegistrationFormType extends AbstractType
                     'placeholder' => 'exemple@exemple.com'
                 ]
             ])
+            ->add('date_de_naissance', BirthdayType::class, [
+                'label' => "Date de naissance *",
+                'required' => true,
+                'attr' => [
+                    'placeholder' => 'Select a value'
+                ]
+            ])
             ->add('telephone', null, [
                 'label' => "Numéro de téléphone",
                 'attr' => [
@@ -70,11 +77,16 @@ class RegistrationFormType extends AbstractType
                     'placeholder' => '75000'
                 ]
             ])
-
+            ->add('numero_de_secu', null, [
+                'label' => "Numéro de sécurité social ",
+                'attr' => [
+                    'placeholder' => 'A BB CC DD EEE FFF GG'
+                ]
+            ])
             
             ->add('pays', CountryType::class, [
                 'required' => false,
-                'preferred_choices' => ['DE'],
+                'preferred_choices' => ['FR'],
                 'label' => 'Pays',
                 'attr' => [
                     'class' => 'form-control',
@@ -85,28 +97,8 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
 
-            ->add('numero_de_secu', null, [
-                'label' => "Numéro de sécurité social ",
-                'attr' => [
-                    'placeholder' => 'A BB CC DD EEE FFF GG'
-                ]
-            ])
-
-            ->add('date_de_naissance', BirthdayType::class, [
-                'label' => "Date de naissance *",
-                'required' => true,
-                'attr' => [
-                    'placeholder' => 'Select a value'
-                ]
-            ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
+            
+            
             ->add('plainPassword', PasswordType::class, [
                 'label' => "Password *",
                 'attr' => [
@@ -124,6 +116,14 @@ class RegistrationFormType extends AbstractType
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
+                    ]),
+                ],
+            ])
+            ->add('agreeTerms', CheckboxType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'You should agree to our terms.',
                     ]),
                 ],
             ])

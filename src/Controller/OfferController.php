@@ -6,6 +6,7 @@ use App\Entity\Offer;
 use App\Entity\User;
 use App\Entity\Souscription;
 use App\Form\OfferType;
+use App\Form\RegistrationFormType;
 use App\Controller\UserController;
 use App\Repository\OfferRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -140,8 +141,9 @@ class OfferController extends AbstractController
                 }
                 
             } else {
-                $this->addFlash('success', 'Vous devez remplir tout le formulaire pour souscrire à une offre');
-                return $this->redirectToRoute('user_edit');
+
+                $this->addFlash('success', 'Vous devez remplir toutes les informations de votre profil pour souscrire à une offre');
+                return $this->redirectToRoute('user_home');
             }
             
         } else {

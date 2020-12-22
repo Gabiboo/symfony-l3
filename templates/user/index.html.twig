@@ -28,8 +28,8 @@
                 <td>{{ user.email }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                 <td>
-                    <a href="{{ path('user_show_a', {'id': user.id}) }}">Voir le profil</a></br>
-                    <a href="{{ path('user_edit_a', {'id': user.id}) }}">Éditer le profil</a>
+                    <a class="btn btn-info" href="{{ path('user_show_a', {'id': user.id}) }}">Voir le profil</a></br></br>
+                    <a class="btn btn-dark" href="{{ path('user_edit_a', {'id': user.id}) }}">Éditer le profil</a>
                 </td>
             </tr>
         {% else %}

@@ -46,12 +46,12 @@ class ArticleType extends AbstractType
                         'mimeTypes' => [
                             'application/pdf',
                             'application/x-pdf',
-                            'application/jpg',
-                            'application/x-jpg',
-                            'application/jpeg',
-                            'application/x-jpeg',
-                            'application/png',
-                            'application/x-png',
+                            'image/jpg',
+                            'image/x-jpg',
+                            'image/jpeg',
+                            'image/x-jpeg',
+                            'image/png',
+                            'image/x-png',
 
                         ],
                         'mimeTypesMessage' => 'Veuillez utiliser uniquement des fichiers .pdf .png .jpg .jpeg',
