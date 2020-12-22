@@ -69,8 +69,8 @@ class User implements UserInterface
     private $date_de_naissance;
 
     /**
-     * 
      * @ORM\Column(type="string", length=255, nullable=true)
+     * * @Assert\Regex("^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})^")
      */
     private $telephone;
 
@@ -245,12 +245,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getTelephone(): ?int
+    public function getTelephone(): ?string
     {
         return $this->telephone;
     }
 
-    public function setTelephone(?int $telephone): self
+    public function setTelephone(?string $telephone): self
     {
         $this->telephone = $telephone;
 

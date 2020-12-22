@@ -3,8 +3,16 @@
 {% block title %}Edit User{% endblock %}
 
 {% block body %}
-    
-    <a class="btn btn-light" href="{{ path('user_home') }}">Mon espace</a>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="full">
+                <div class="heading_main text_align_center">
+                    <h2><span class="theme_color text-align-center"></span>Modifier mes informations</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-light" href="{{ path('user_home') }}"> < Mon espace</a>
 
     {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
 
