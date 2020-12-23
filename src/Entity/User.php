@@ -185,6 +185,14 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
+    public function getAgeuser(){
+        $now = new \DateTime('now');
+        $date = $this->date_de_naissance;
+        $difference = $now->diff($date);
+
+        return $difference->y;
+    }
+    
     public function getBlocked(): ?bool
     {
         return $this->blocked;

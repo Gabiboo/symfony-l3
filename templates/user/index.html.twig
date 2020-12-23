@@ -18,7 +18,8 @@
                 <th scope="col">Id</th>
                 <th scope="col">Email</th>
                 <th scope="col">Roles</th>
-                <th scope="col">actions</th>
+                <th scope="col">Age</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -26,7 +27,9 @@
             <tr>
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
+                
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.ageuser }} ans</td>
                 <td>
                     <a class="btn btn-info" href="{{ path('user_show_a', {'id': user.id}) }}">Voir le profil</a></br></br>
                     <a class="btn btn-dark" href="{{ path('user_edit_a', {'id': user.id}) }}">Éditer le profil</a>

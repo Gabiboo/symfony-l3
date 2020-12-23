@@ -6,7 +6,6 @@ use App\Entity\Souscription;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Form\UserType;
-use App\Repository\SouscriptionRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
